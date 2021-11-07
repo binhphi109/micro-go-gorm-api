@@ -1,1 +1,1 @@
-# micro-go-gorm-rest
+# micro-go-gorm-api

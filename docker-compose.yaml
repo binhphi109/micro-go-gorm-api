@@ -1,0 +1,23 @@
+version: '2.4'
+services:
+  mysql:
+    container_name: kasse-mysql
+    image: "mysql/mysql-server:5.7.12"
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - kasse-test
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: kassetest
+      MYSQL_PASSWORD: kassetest
+      MYSQL_USER: kasseuser
+      MYSQL_DATABASE: kasse_test
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - ./docker/mysql.conf.d/source.cnf:/etc/mysql/conf.d/mysql.cnf
